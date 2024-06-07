@@ -1,0 +1,21 @@
+
+.input {
+    width: 100%;
+    border: solid 1px #eaeaf1;
+    background-color: #ffffff;
+    border-radius: 6px;
+    padding: 13px 16px 12px;
+    display: block;
+  }
+  .input.error {
+    border-color: #ce0000;
+  }
+  .input::placeholder {
+    color: #a3a6be;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .search {
+    padding: 5px 16px 5px;
+  }
+  
