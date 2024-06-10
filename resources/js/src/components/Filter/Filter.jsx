@@ -10,45 +10,38 @@ function Filter() {
   const dispatch = useDispatch();
   const location = useLocation();
   const values_w = queryString.parse(location.search);
-
-  const { gander } = useSelector(({ gander }) => ({
-    gander: gander.gander
-  }
-  )
-  );
+  const { gander } = useSelector((state) => ({
+    gander: state.gander.gander || []
+  }));
   const [formData, updateFormData] = useState({
     title: values_w.title || "",
     date_from: values_w.date_from || "",
     date_to: values_w.date_to || "",
     t: values_w.t || "",
-    g: values_w.g || []
+    g: values_w.g ? (Array.isArray(values_w.g) ? values_w.g : [values_w.g]) : []
   });
-
   useEffect(() => {
     dispatch(getGander());
   }, [dispatch]);
-
   useEffect(() => {
     const values = queryString.parse(location.search, {
       arrayFormat: "index",
     });
-    updateFormData(values);
+    updateFormData({
+      title: values.title || "",
+      date_from: values.date_from || "",
+      date_to: values.date_to || "",
+      t: values.t || "",
+      g: values.g ? (Array.isArray(values.g) ? values.g : [values.g]) : []
+    });
   }, [location.search]);
-
   const handleInputChange = (newValue) => {
     updateFormData({
       ...formData,
-      g: newValue
+      g: newValue.map(option => option.value)
     });
   };
-  // const handleInputChange = (selectedOptions) => {
-  //   const selectedGenres = selectedOptions.map(option => option.value);
-  //   updateFormData({
-  //     ...formData,
-  //     g: selectedGenres
-  //   });
-  // };
-  const handleChange = e => {
+  const handleChange = (e) => {
     if (e != null && e.target) {
       updateFormData({
         ...formData,
@@ -56,13 +49,14 @@ function Filter() {
       });
     }
   };
+
   function serialize(obj, prefix) {
     var str = [],
       p;
     for (p in obj) {
       var k = prefix ? prefix + "[" + p + "]" : p,
         v = obj[p];
-      if (k && k != "undefined" && v != "" && v != null) {
+      if (k && k !== "undefined" && v !== "" && v != null) {
         str.push(
           v !== null && typeof v === "object"
             ? serialize(v, k)
@@ -71,24 +65,24 @@ function Filter() {
       }
     }
     return str.join("&");
-  };
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    updateFormData({ page: 1 });
-    const data = formData
-    data.search = true
+    const data = { ...formData, search: true };
     delete data.page;
-    updateFormData({ ...data, g: [] })
+    updateFormData({ ...data, g: [] });
     history.push("/?" + serialize(data));
     window.location.reload();
-  };
+  }
+
   return (
     <div className="sidebar">
       <form
         className="form-style-1"
         action="/search"
         id="filter"
-        onSubmit={handleSubmit.bind()}>
+        onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-xs-12 form-it" style={{ zIndex: "9" }}>
             <input
@@ -131,10 +125,10 @@ function Filter() {
                 name="t"
                 className="ui fluid type_ms select2"
                 value={formData.t}
-                onChange={handleChange} >
+                onChange={handleChange}>
                 <option value="">Тип</option>
-                <option value="movie" selected={formData.t === "movie"}>ФИЛЬМЫ</option>
-                <option value="series" selected={formData.t === "series"} >CЕРИАЛЫ</option>
+                <option value="movie" selected={formData.t === "movie"}> Фильмы</option>
+                <option value="series" selected={formData.t === "series"}>Сериалы</option>
               </select>
             </div>
           </div>
@@ -143,12 +137,12 @@ function Filter() {
               <Select
                 name="g"
                 isMulti={true}
-                getOptionLabel={option => option}
-                getOptionValue={(option) => option}
-                value={formData.g}
-                id="gSe"
+                options={gander.map(g => ({ label: g, value: g }))}
+                value={formData.g.map(g => ({ label: g, value: g }))}
                 placeholder="Жанры"
                 onChange={handleInputChange}
+                id="gSe"
+
               />
             </div>
           </div>
@@ -159,11 +153,7 @@ function Filter() {
         </div>
       </form>
     </div>
-  )
-};
+  );
+}
 
 export default Filter;
-
-
-
-
