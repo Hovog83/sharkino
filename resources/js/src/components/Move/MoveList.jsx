@@ -16,11 +16,9 @@ function MoveList() {
  const params= useParams()
   const dispatch = useDispatch();
   const values = queryString.parse(history.location.search);
-  console.log(params)
   const { moves } = useSelector(({ move }) => ({
     moves: move.moves
   }));
-
   function serialize(obj, prefix) {
     var str = [],
       p;
@@ -82,8 +80,8 @@ function MoveList() {
         />
       </div>
         <div className="col-md-12" style={{padding: "0", marginBottom: "20px"}}>
-            <a href={TelegramLink}>
-                <img src="/hg.jpg" alt="sharkion" title="sharkion" style={{width: "100%"}}/>
+        <a href={TelegramLink} target="_blank">
+        <img src="/hg.jpg" alt="sharkion" title="sharkion" style={{width: "100%"}}/>
             </a>
         </div>
         <div className="flex-wrap-movielist">
@@ -158,8 +156,8 @@ function MoveList() {
         />
       </div>
         <div className="col-md-12">
-            <a href={TelegramLink}>
-                <img src="/hg.jpg" alt="sharkion" title="sharkion"/>
+        <a href={TelegramLink} target="_blank">
+        <img src="/hg.jpg" alt="sharkion" title="sharkion"/>
             </a>
         </div>
     </div>

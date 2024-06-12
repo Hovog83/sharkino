@@ -30,7 +30,7 @@ const MoveListActors = () => {
           </Helmet>
           <div>
           </div>
-              <a href={TelegramLink}>
+          <a href={TelegramLink} target="_blank">
                   <img src="/hg.jpg" alt="sharkion" title="sharkion"/>
               </a>
               <div id="preloader">

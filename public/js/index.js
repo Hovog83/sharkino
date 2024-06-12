@@ -6868,12 +6868,9 @@ var FilmsComponent = function FilmsComponent(props) {
     var href = this_.getAttribute("data-index");
     setActive(href);
   }
-  var backdropPath = getMoveObj.backdrop_path ? "https://image.tmdb.org/t/p/original".concat(getMoveObj.backdrop_path) : '';
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "background-container",
-    style: {
-      // backgroundImage: `url(${backdropPath})`,
-    }
+    style: {}
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_helmet__WEBPACK_IMPORTED_MODULE_5__.Helmet, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("title", null, "SharKino | ", getMoveObj.title_ru, " | ", getMoveObj.title_orig)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "preloader"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -6897,7 +6894,8 @@ var FilmsComponent = function FilmsComponent(props) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "col-md-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: _Telegram_Telegram__WEBPACK_IMPORTED_MODULE_7__["default"]
+    href: _Telegram_Telegram__WEBPACK_IMPORTED_MODULE_7__["default"],
+    target: "_blank"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: "/vg.jpg",
     alt: "sharkion",
@@ -6981,7 +6979,8 @@ var FilmsComponent = function FilmsComponent(props) {
       marginBottom: "20px"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: _Telegram_Telegram__WEBPACK_IMPORTED_MODULE_7__["default"]
+    href: _Telegram_Telegram__WEBPACK_IMPORTED_MODULE_7__["default"],
+    target: "_blank"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: "/hg.jpg",
     alt: "sharkion",
@@ -7627,161 +7626,177 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../styles.css */ "./resources/js/src/styles.css");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
 var Menu = function Menu() {
-  var back = function back() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isMenuOpen = _useState2[0],
+    setIsMenuOpen = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isMoviesDropdownOpen = _useState4[0],
+    setIsMoviesDropdownOpen = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isSeriesDropdownOpen = _useState6[0],
+    setIsSeriesDropdownOpen = _useState6[1];
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
+  var toggleMenu = function toggleMenu(e) {
+    e.preventDefault();
+    setIsMenuOpen(function (prevState) {
+      return !prevState;
+    });
+  };
+  var toggleMoviesDropdown = function toggleMoviesDropdown(e) {
+    e.preventDefault();
+    setIsMoviesDropdownOpen(function (prevState) {
+      return !prevState;
+    });
+  };
+  var toggleSeriesDropdown = function toggleSeriesDropdown(e) {
+    e.preventDefault();
+    setIsSeriesDropdownOpen(function (prevState) {
+      return !prevState;
+    });
+  };
+  var goToHome = function goToHome(e) {
+    e.preventDefault();
+    navigate('/');
     window.location.reload();
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
     className: "navbar navbar-default navbar-custom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "navbar-header logo",
-    onClick: back
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+    className: "navbar-header logo"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     title: "sharkion",
-    to: "/"
+    to: "/",
+    onClick: goToHome
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     className: "logo",
     src: "/logo1.png?v=1",
     title: "Sharkion",
     alt: "Sharkion",
     width: "110"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    type: "button",
+    className: "navbar-toggle",
+    onClick: toggleMenu,
+    "aria-expanded": isMenuOpen ? "true" : "false",
+    "aria-controls": "bs-example-navbar-collapse-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "icon-bar"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "icon-bar"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "icon-bar"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "collapse navbar-collapse flex-parent",
+    className: "collapse navbar-collapse flex-parent ".concat(isMenuOpen ? "show" : ""),
     id: "bs-example-navbar-collapse-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
     className: "nav navbar-nav flex-child-menu menu-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-    className: "dropdown first acrive"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    to: "/?search=true&t=movie",
-    className: "btn btn-default dropdown-toggle lv1"
+    className: "dropdown first ".concat(isMoviesDropdownOpen ? "oa" : "")
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: "#",
+    className: "btn btn-default dropdown-toggle lv1",
+    onClick: toggleMoviesDropdown
   }, "\u0424\u0438\u043B\u044C\u043C\u044B ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
     className: "fa fa-angle-down",
     "aria-hidden": "true"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
     className: "dropdown-menu level1"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0431\u043E\u0435\u0432\u0438\u043A",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/thriller"
-  }, "\u0411\u043E\u0435\u0432\u0438\u043A")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u043F\u0440\u0438\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u044F",
-    to: "/category/movie/genre/adventures"
-  }, "\u041F\u0440\u0438\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u043C\u0443\u043B\u044C\u0442\u0444\u0438\u043B\u044C\u043C",
+  }, "\u0411\u043E\u0435\u0432\u0438\u043A")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/cartoon"
-  }, "\u041C\u0443\u043B\u044C\u0442\u0444\u0438\u043B\u044C\u043C")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u043A\u043E\u043C\u0435\u0434\u0438\u044F",
+  }, "\u041C\u0443\u043B\u044C\u0442\u0444\u0438\u043B\u044C\u043C")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/comedy"
-  }, "\u041A\u043E\u043C\u0435\u0434\u0438\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u043A\u0440\u0438\u043C\u0438\u043D\u0430\u043B",
+  }, "\u041A\u043E\u043C\u0435\u0434\u0438\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/crime"
-  }, "\u041A\u0440\u0438\u043C\u0438\u043D\u0430\u043B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u044B\u0439",
+  }, "\u041A\u0440\u0438\u043C\u0438\u043D\u0430\u043B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/documentary"
-  }, "\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u044B\u0439")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0434\u0440\u0430\u043C\u0430",
+  }, "\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u044B\u0439")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/drama"
-  }, "\u0414\u0440\u0430\u043C\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0441\u0435\u043C\u0435\u0439\u043D\u044B\u0439",
+  }, "\u0414\u0440\u0430\u043C\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/family"
-  }, "\u0421\u0435\u043C\u0435\u0439\u043D\u044B\u0439")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0444\u044D\u043D\u0442\u0435\u0437\u0438",
+  }, "\u0421\u0435\u043C\u0435\u0439\u043D\u044B\u0439")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/fantasy"
-  }, "\u0424\u044D\u043D\u0442\u0435\u0437\u0438")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0438\u0441\u0442\u043E\u0440\u0438\u044F",
+  }, "\u0424\u044D\u043D\u0442\u0435\u0437\u0438")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/story"
-  }, "\u0418\u0441\u0442\u043E\u0440\u0438\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0443\u0436\u0430\u0441\u044B",
+  }, "\u0418\u0441\u0442\u043E\u0440\u0438\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/horrors"
-  }, "\u0423\u0436\u0430\u0441\u044B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u043C\u0443\u0437\u044B\u043A\u0430",
+  }, "\u0423\u0436\u0430\u0441\u044B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/music"
-  }, "\u041C\u0443\u0437\u044B\u043A\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0434\u0435\u0442\u0435\u043A\u0442\u0438\u0432",
+  }, "\u041C\u0443\u0437\u044B\u043A\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/detective"
-  }, "\u0414\u0435\u0442\u0435\u043A\u0442\u0438\u0432")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u043C\u0435\u043B\u043E\u0434\u0440\u0430\u043C\u0430",
+  }, "\u0414\u0435\u0442\u0435\u043A\u0442\u0438\u0432")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/melodrama"
-  }, "\u041C\u0435\u043B\u043E\u0434\u0440\u0430\u043C\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0444\u0430\u043D\u0442\u0430\u0441\u0442\u0438\u043A\u0430",
+  }, "\u041C\u0435\u043B\u043E\u0434\u0440\u0430\u043C\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/fantasy"
-  }, "\u0424\u0430\u043D\u0442\u0430\u0441\u0442\u0438\u043A\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0442\u0435\u043B\u0435\u0432\u0438\u0437\u0438\u043E\u043D\u043D\u044B\u0439",
-    to: "/category/movie/genre/television"
-  }, "\u0422\u0435\u043B\u0435\u0432\u0438\u0437\u0438\u043E\u043D\u043D\u044B\u0439")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0442\u0440\u0438\u043B\u043B\u0435\u0440",
+  }, "\u0424\u0430\u043D\u0442\u0430\u0441\u0442\u0438\u043A\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/thriller"
-  }, "\u0422\u0440\u0438\u043B\u043B\u0435\u0440")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0432\u043E\u0435\u043D\u043D\u044B\u0439",
+  }, "\u0422\u0440\u0438\u043B\u043B\u0435\u0440")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/military"
-  }, "\u0412\u043E\u0435\u043D\u043D\u044B\u0439")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0432\u0435\u0441\u0442\u0435\u0440\u043D",
+  }, "\u0412\u043E\u0435\u043D\u043D\u044B\u0439")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/movie/genre/western"
-  }, "\u0412\u0435\u0441\u0442\u0435\u0440\u043D")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-    className: "dropdown first acrive"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    to: "/?search=true&t=series",
+  }, "\u0412\u0435\u0441\u0442\u0435\u0440\u043D")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/category/movie/genre/television"
+  }, "\u0422\u0435\u043B\u0435\u0432\u0438\u0437\u0438\u043E\u043D\u043D\u044B\u0439")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+    className: "dropdown first ".concat(isSeriesDropdownOpen ? "a" : "")
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: "#",
     className: "btn btn-default dropdown-toggle lv1",
-    "data-toggle": "dropdown"
-  }, " C\u0435\u0440\u0438\u0430\u043B\u044B", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
+    onClick: toggleSeriesDropdown
+  }, "C\u0435\u0440\u0438\u0430\u043B\u044B ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
     className: "fa fa-angle-down",
     "aria-hidden": "true"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
     className: "dropdown-menu level1"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0411\u043E\u0435\u0432\u0438\u043A \u0438 \u041F\u0440\u0438\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u044F",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/series/genre/action-adventure"
-  }, "\u0411\u043E\u0435\u0432\u0438\u043A \u0438 \u041F\u0440\u0438\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u043C\u0443\u043B\u044C\u0442\u0444\u0438\u043B\u044C\u043C",
+  }, "\u0411\u043E\u0435\u0432\u0438\u043A")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/series/genre/cartoon"
-  }, "\u043C\u0443\u043B\u044C\u0442\u0444\u0438\u043B\u044C\u043C")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u043A\u043E\u043C\u0435\u0434\u0438\u044F",
+  }, "\u043C\u0443\u043B\u044C\u0442\u0444\u0438\u043B\u044C\u043C")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/series/genre/comedy"
-  }, "\u043A\u043E\u043C\u0435\u0434\u0438\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u043A\u0440\u0438\u043C\u0438\u043D\u0430\u043B",
+  }, "\u043A\u043E\u043C\u0435\u0434\u0438\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/series/genre/crime"
-  }, "\u043A\u0440\u0438\u043C\u0438\u043D\u0430\u043B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u044B\u0439",
-    to: "/category/series/genre/documentary"
-  }, "\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u044B\u0439")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0434\u0440\u0430\u043C\u0430",
+  }, "\u043A\u0440\u0438\u043C\u0438\u043D\u0430\u043B")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/series/genre/drama"
-  }, "\u0434\u0440\u0430\u043C\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0441\u0435\u043C\u0435\u0439\u043D\u044B\u0439",
+  }, "\u0434\u0440\u0430\u043C\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/series/genre/family"
-  }, "\u0441\u0435\u043C\u0435\u0439\u043D\u044B\u0439")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0414\u0435\u0442\u0441\u043A\u0438\u0439",
+  }, "\u0441\u0435\u043C\u0435\u0439\u043D\u044B\u0439")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/series/genre/child"
-  }, "\u0414\u0435\u0442\u0441\u043A\u0438\u0439")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0434\u0435\u0442\u0435\u043A\u0442\u0438\u0432",
+  }, "\u0414\u0435\u0442\u0441\u043A\u0438\u0439")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/series/genre/detective"
-  }, "\u0434\u0435\u0442\u0435\u043A\u0442\u0438\u0432")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u041D\u043E\u0432\u043E\u0441\u0442\u0438",
+  }, "\u0434\u0435\u0442\u0435\u043A\u0442\u0438\u0432")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/series/genre/news"
-  }, "\u041D\u043E\u0432\u043E\u0441\u0442\u0438")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0420\u0435\u0430\u043B\u0438\u0442\u0438-\u0448\u043E\u0443",
-    to: "/category/series/genre/reality-show"
-  }, "\u0420\u0435\u0430\u043B\u0438\u0442\u0438-\u0448\u043E\u0443")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u041D\u0424 \u0438 \u0424\u044D\u043D\u0442\u0435\u0437\u0438",
-    to: "/category/series/genre/sf-and-fantasy"
-  }, "\u041D\u0424 \u0438 \u0424\u044D\u043D\u0442\u0435\u0437\u0438")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u041C\u044B\u043B\u044C\u043D\u0430\u044F \u043E\u043F\u0435\u0440\u0430",
-    to: "/category/series/genre/soap-opera"
-  }, "\u041C\u044B\u043B\u044C\u043D\u0430\u044F \u043E\u043F\u0435\u0440\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0422\u043E\u043A-\u0448\u043E\u0443",
-    to: "/category/series/genre/talk-show"
-  }, "\u0422\u043E\u043A-\u0448\u043E\u0443")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0412\u043E\u0439\u043D\u0430 \u0438 \u041F\u043E\u043B\u0438\u0442\u0438\u043A\u0430",
+  }, "\u041D\u043E\u0432\u043E\u0441\u0442\u0438")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/series/genre/war-and-politics"
-  }, "\u0412\u043E\u0439\u043D\u0430 \u0438 \u041F\u043E\u043B\u0438\u0442\u0438\u043A\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    title: "\u0432\u0435\u0441\u0442\u0435\u0440\u043D",
+  }, "\u0412\u043E\u0439\u043D\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/category/series/genre/sf-and-fantasy"
+  }, "\u0424\u044D\u043D\u0442\u0435\u0437\u0438")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/category/series/genre/soap-opera"
+  }, "\u041C\u044B\u043B\u044C\u043D\u0430\u044F \u043E\u043F\u0435\u0440\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/category/series/genre/western"
-  }, "\u0432\u0435\u0441\u0442\u0435\u0440\u043D"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
+  }, "\u0432\u0435\u0441\u0442\u0435\u0440\u043D")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/category/series/genre/talk-show"
+  }, "\u0422\u043E\u043A-\u0448\u043E\u0443")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/category/series/genre/reality-show"
+  }, "\u0420\u0435\u0430\u043B\u0438\u0442\u0438-\u0448\u043E\u0443")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/category/series/genre/documentary"
+  }, "\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u044B\u0439"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
     className: "nav navbar-nav flex-child-menu menu-right"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
     className: "btn signupLink"
@@ -7853,7 +7868,8 @@ var MoveListActors = function MoveListActors() {
     dispatch((0,_redux_actions_move__WEBPACK_IMPORTED_MODULE_5__.getAllMoveActors)(id, params));
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_helmet__WEBPACK_IMPORTED_MODULE_1__.Helmet, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("title", null, "SharKino | ", (movesActors === null || movesActors === void 0 || (_movesActors$data$ = movesActors.data[0]) === null || _movesActors$data$ === void 0 ? void 0 : _movesActors$data$.actors_name) || "Actor Details")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: _Telegram_Telegram__WEBPACK_IMPORTED_MODULE_6__["default"]
+    href: _Telegram_Telegram__WEBPACK_IMPORTED_MODULE_6__["default"],
+    target: "_blank"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: "/hg.jpg",
     alt: "sharkion",
@@ -8003,7 +8019,6 @@ function MoveList() {
   var params = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useParams)();
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_7__.useDispatch)();
   var values = query_string__WEBPACK_IMPORTED_MODULE_8__["default"].parse(_utils_history_js__WEBPACK_IMPORTED_MODULE_3__["default"].location.search);
-  console.log(params);
   var _useSelector = (0,react_redux__WEBPACK_IMPORTED_MODULE_7__.useSelector)(function (_ref) {
       var move = _ref.move;
       return {
@@ -8078,7 +8093,8 @@ function MoveList() {
       marginBottom: "20px"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: _Telegram_Telegram__WEBPACK_IMPORTED_MODULE_5__["default"]
+    href: _Telegram_Telegram__WEBPACK_IMPORTED_MODULE_5__["default"],
+    target: "_blank"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: "/hg.jpg",
     alt: "sharkion",
@@ -8180,7 +8196,8 @@ function MoveList() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "col-md-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: _Telegram_Telegram__WEBPACK_IMPORTED_MODULE_5__["default"]
+    href: _Telegram_Telegram__WEBPACK_IMPORTED_MODULE_5__["default"],
+    target: "_blank"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: "/hg.jpg",
     alt: "sharkion",

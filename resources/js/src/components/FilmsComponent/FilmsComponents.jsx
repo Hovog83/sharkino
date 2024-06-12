@@ -27,11 +27,8 @@ const FilmsComponent = (props) => {
     let href = this_.getAttribute("data-index");
     setActive(href);
   }
-  const backdropPath = getMoveObj.backdrop_path ? `https://image.tmdb.org/t/p/original${getMoveObj.backdrop_path}` : '';
-
   return (
     <div className="background-container" style={{ 
-      // backgroundImage: `url(${backdropPath})`,
       }} >
       <Helmet>
         <title>
@@ -56,7 +53,7 @@ const FilmsComponent = (props) => {
           <Moveinfo move={getMoveObj} />
         </div>
         <div className="col-md-3">
-          <a href={TelegramLink}>
+          <a href={TelegramLink} target="_blank">
             <img src="/vg.jpg" alt="sharkion" title="sharkion" style={{height: 'auto', width: ''}}/>
           </a>
         </div>
@@ -134,7 +131,7 @@ const FilmsComponent = (props) => {
             </div>
             <CommentsPlugin filmUrl={filmUrl} />
             <div className="col-md-12" style={{ padding: "0", marginBottom: "20px" }}>
-              <a href={TelegramLink}>
+              <a href={TelegramLink} target="_blank">
                 <img src="/hg.jpg" alt="sharkion" title="sharkion" style={{width: "100%"}}/>
               </a>
             </div>

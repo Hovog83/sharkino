@@ -10,7 +10,6 @@ import Slider from "../../components/Slider/Slider";
 const Homepage=(props)=> {
     let type = "";
     let genreName = "Смотрите фильмы в HD качестве";
-   
   return (
     <div>
       <Helmet>
@@ -49,5 +48,4 @@ const Homepage=(props)=> {
     </div>
   );
 }
-
 export default Homepage;
